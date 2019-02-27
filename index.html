@@ -388,7 +388,7 @@
           
             <h1 id="关于egg-jwt"><a href="#关于egg-jwt" class="headerlink" title="关于egg_jwt"></a>关于egg_jwt</h1><p>由于涉及到登录注册的操作，所以考虑到需要生成 <code>Token</code> 来做验证登录信息（其实一开始并没有考虑到这方面，而是直接把用户信息直接 set 到浏览器的 <code>cookie</code> 里面，连加密都不带的，果然还是太年轻。后来经高人指点，才改成使用生成 <code>Token</code> 的方式来实现验证登录，都不必把用户信息丢到 <code>cookie</code> 里面了，想想也是不错的。）</p>
 <p>这里使用 <a href="https://github.com/okoala/egg-jwt" target="_blank" rel="noopener">egg-jwt</a> 来生成 <code>Token</code> 以及相关的校验操作。期间也踩了不少堪称弱智的坑…… 想了想还是做一下简单的记录，防止以后又陷进去</p>
-<h2 id="egg-jwt-的引入以及相关配置"><a href="#egg-jwt-的引入以及相关配置" class="headerlink" title="egg-jwt 的引入以及相关配置"></a>egg-jwt 的引入以及相关配置</h2><p>引入插件，插件的引入有几种写法:<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i egg-jwt --save</span><br></pre></td></tr></table></figure></p>
+<h1 id="egg-jwt-的引入以及相关配置"><a href="#egg-jwt-的引入以及相关配置" class="headerlink" title="egg-jwt 的引入以及相关配置"></a>egg-jwt 的引入以及相关配置</h1><p>引入插件，插件的引入有几种写法:<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i egg-jwt --save</span><br></pre></td></tr></table></figure></p>
 <p>或者<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add egg-jwt --save</span><br></pre></td></tr></table></figure></p>
 <p>两种方法引入。</p>
 <p>在 <code>app/config/plugin.js</code> 配置如下：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">exports.jwt = &#123;</span><br><span class="line">  enable: true,</span><br><span class="line">  package:  'egg-jwt'</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
@@ -422,6 +422,7 @@
 <p><strong><em>问题解决</em></strong><br>Google 了一下，Get 到了一个比较相似的 <a href="https://github.com/auth0/node-jsonwebtoken/issues/326" target="_blank" rel="noopener">Issue</a> 。琢磨了半天，尝试了一下对序列化后的数据再进行反序列化操作 —— <code>JSON.parse()</code>，然后，就没有然后了。居然成功了。。。莫非一开始拿到的值并不是一个真正的 <code>object</code> ?这里博主暂时没有琢磨透，等琢磨透了再来更新。</p>
 <p>其实对一些人来说，一号坑可能遇都不会遇到，可能是博主比较菜，所以还是踩了一小段时间的，记录一下只是防止以后再犯类似的错误。</p>
 <p>到这里博主基本已经完成了登录成功之后签发 <code>Token</code> 的步骤了，并且将之存储在了浏览器的 <code>cookie</code> 里面，具体操作可参考 <code>Egg</code>  <a href="https://eggjs.org/zh-cn/core/cookie-and-session.html" target="_blank" rel="noopener">cookie-and-session</a>。之后的每次请求，前端部分都将<code>Token</code>的值放在了请求头的 <code>authorization</code> 里面，传到后端的时候再从请求头里面将该参数取出并解签。</p>
+<p><strong>2、verify方法的参数问题</strong></p>
 <p>这里博主定义了一个中间件（<code>Middleware</code>，具体操作可参考 <a href="https://eggjs.org/zh-cn/basics/middleware.html" target="_blank" rel="noopener">中间件 (Middleware)</a>）用来判断请求头是否存在该参数(具体哪些接口需要判断 <code>Token</code> 就要视业务情况来定了)。</p>
 <ul>
 <li>不存在，则直接返回 <strong>401</strong> 状态码以及相关的错误信息，并且不继续请求接口操作。</li>
