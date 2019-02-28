@@ -272,6 +272,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.guodc.top/2019/02/28/egg-cors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Danny Guo">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Danny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/28/egg-cors/" itemprop="url">egg-cors</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-28T17:04:42+08:00">
+                2019-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端/" itemprop="url" rel="index">
+                    <span itemprop="name">后端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/28/egg-cors/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/28/egg-cors/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/02/28/egg-cors/" class="leancloud_visitors" data-flag-title="egg-cors">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于egg-cors"><a href="#关于egg-cors" class="headerlink" title="关于egg-cors"></a>关于egg-cors</h1><p>前后端分离的项目开发，跨域往往是一个避不开的坎。所以这里使用了<a href="https://github.com/eggjs/egg-cors" target="_blank" rel="noopener">egg-cors</a>来完成跨域的相关配置。在这里做一下简单的记录。</p>
+<h1 id="egg-cors-的引入以及相关配置"><a href="#egg-cors-的引入以及相关配置" class="headerlink" title="egg-cors 的引入以及相关配置"></a>egg-cors 的引入以及相关配置</h1><p>插件的引入有几种写法：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i egg-cors --save</span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add egg-cors --save</span><br></pre></td></tr></table></figure></p>
+<p>两种方法引入。</p>
+<p>在 <code>app/config/plugin.js</code> 配置如下：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">exports.cors = &#123;</span><br><span class="line">  enable: true,</span><br><span class="line">  package: 'egg-cors'</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>继续配置 <code>app/config/config.default.js</code>：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">config.cors = &#123;</span><br><span class="line">  origins: ctx =&gt; ctx.get('origin'),</span><br><span class="line">  allowMethods: 'GET, HEAD, PUT, POST, DELETE, PATCH',</span><br><span class="line">  credentials:  true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>这里对以上几个参数的配置做一下简单的介绍。</strong></p>
+<ul>
+<li>当 <code>credentials</code> 参数不设置的时候 ( 或者设置为 <strong><code>false</code></strong> )，即默认前端发起请求的时候不允许在请求头与响应头里面携带 <code>cookie</code> 参数。此时可以设置 <code>origin</code> 参数为 <strong><code>&#39;*&#39;</code></strong>。然后也可以配合 <code>egg-security</code> 插件配置白名单 ( 这里博主还没有做过多研究，就简单带过 )。</li>
+<li>当 <code>credentials</code> 参数设置为 <strong><code>true</code></strong> 的时候，前端配合设置 <code>withCredentials</code> 参数为 <strong><code>true</code></strong> ( 这里博主前端采用的技术栈是 <strong><code>axios</code></strong> )，即可以实现前端发起请求的时候允许携带 <code>cookie</code> 参数信息。但是这里有需要注意的地方，<strong>划重点划重点！！！</strong></li>
+</ul>
+<p>当设置 <code>credentials</code> 为 <strong><code>true</code></strong> 时，<code>origin</code> 参数 <em>不允许为 <strong><code>&#39;*&#39;</code></strong>!</em> <em>不允许为 <strong><code>&#39;*&#39;</code></strong>!</em> <em>不允许为 <strong><code>&#39;*&#39;</code></strong>!</em> 而是只能设置为一个固定的 <code>origin</code> ( 连数组都不允许设置，感觉相当不友好啊，也不知道是不是博主自己配置错误了Orz…)。导致博主在本地开发的时候需要设置一个本地的 <code>origin</code>,部署到服务器的时候又要改成一个服务器的 <code>origin</code>，相当麻烦。</p>
+<p>好在后来 Google 到了一个比较好的解决方案。就是按照之前所配置的写法，即：<strong><code>origin: ctx =&gt; ctx.get(&#39;origin&#39;)</code></strong>，直接在 <code>ctx</code> 里面取出相关的参数进行设置。这样就不用频繁去切换本地与服务端的参数值了~~~</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.guodc.top/2019/02/27/egg-jwt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -386,7 +561,7 @@
       
         
           
-            <h1 id="关于egg-jwt"><a href="#关于egg-jwt" class="headerlink" title="关于egg_jwt"></a>关于egg_jwt</h1><p>由于涉及到登录注册的操作，所以考虑到需要生成 <code>Token</code> 来做验证登录信息（其实一开始并没有考虑到这方面，而是直接把用户信息直接 set 到浏览器的 <code>cookie</code> 里面，连加密都不带的，果然还是太年轻。后来经高人指点，才改成使用生成 <code>Token</code> 的方式来实现验证登录，都不必把用户信息丢到 <code>cookie</code> 里面了，想想也是不错的。）</p>
+            <h1 id="关于egg-jwt"><a href="#关于egg-jwt" class="headerlink" title="关于egg-jwt"></a>关于egg-jwt</h1><p>由于涉及到登录注册的操作，所以考虑到需要生成 <code>Token</code> 来做验证登录信息（其实一开始并没有考虑到这方面，而是直接把用户信息直接 set 到浏览器的 <code>cookie</code> 里面，连加密都不带的，果然还是太年轻。后来经高人指点，才改成使用生成 <code>Token</code> 的方式来实现验证登录，都不必把用户信息丢到 <code>cookie</code> 里面了，想想也是不错的。）</p>
 <p>这里使用 <a href="https://github.com/okoala/egg-jwt" target="_blank" rel="noopener">egg-jwt</a> 来生成 <code>Token</code> 以及相关的校验操作。期间也踩了不少堪称弱智的坑…… 想了想还是做一下简单的记录，防止以后又陷进去</p>
 <h1 id="egg-jwt-的引入以及相关配置"><a href="#egg-jwt-的引入以及相关配置" class="headerlink" title="egg-jwt 的引入以及相关配置"></a>egg-jwt 的引入以及相关配置</h1><p>引入插件，插件的引入有几种写法:<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i egg-jwt --save</span><br></pre></td></tr></table></figure></p>
 <p>或者<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add egg-jwt --save</span><br></pre></td></tr></table></figure></p>
@@ -688,7 +863,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -710,7 +885,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
