@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Danny&#39;s Blog">
 <meta property="og:description" content="关于egg-jwt由于涉及到登录注册的操作，所以考虑到需要生成 Token 来做验证登录信息（其实一开始并没有考虑到这方面，而是直接把用户信息直接 set 到浏览器的 cookie 里面，连加密都不带的，果然还是太年轻。后来经高人指点，才改成使用生成 Token 的方式来实现验证登录，都不必把用户信息丢到 cookie 里面了，想想也是不错的。） 这里使用 egg-jwt 来生成 Token 以及">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-01T03:03:07.823Z">
+<meta property="og:updated_time" content="2019-03-01T03:06:22.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="egg-jwt">
 <meta name="twitter:description" content="关于egg-jwt由于涉及到登录注册的操作，所以考虑到需要生成 Token 来做验证登录信息（其实一开始并没有考虑到这方面，而是直接把用户信息直接 set 到浏览器的 cookie 里面，连加密都不带的，果然还是太年轻。后来经高人指点，才改成使用生成 Token 的方式来实现验证登录，都不必把用户信息丢到 cookie 里面了，想想也是不错的。） 这里使用 egg-jwt 来生成 Token 以及">
@@ -384,7 +384,7 @@
 
       
         <h1 id="关于egg-jwt"><a href="#关于egg-jwt" class="headerlink" title="关于egg-jwt"></a>关于egg-jwt</h1><p>由于涉及到登录注册的操作，所以考虑到需要生成 <code>Token</code> 来做验证登录信息（其实一开始并没有考虑到这方面，而是直接把用户信息直接 set 到浏览器的 <code>cookie</code> 里面，连加密都不带的，果然还是太年轻。后来经高人指点，才改成使用生成 <code>Token</code> 的方式来实现验证登录，都不必把用户信息丢到 <code>cookie</code> 里面了，想想也是不错的。）</p>
-<p>这里使用 <a href="https://github.com/okoala/egg-jwt" target="_blank" rel="noopener">egg-jwt</a> 来生成 <code>Token</code> 以及相关的校验操作。期间也踩了不少堪称弱智的坑…… 想了想还是做一下简单的记录，防止以后又陷进去</p>
+<p>这里使用 <a href="https://github.com/okoala/egg-jwt" target="_blank" rel="noopener">egg-jwt</a> 来生成 <code>Token</code> 以及相关的校验操作。期间也踩了不少堪称弱智的坑…… 想了想还是做一下简单的记录，防止以后又陷进去。</p>
 <a id="more"></a>
 <h1 id="egg-jwt-的引入以及相关配置"><a href="#egg-jwt-的引入以及相关配置" class="headerlink" title="egg-jwt 的引入以及相关配置"></a>egg-jwt 的引入以及相关配置</h1><p>引入插件，插件的引入有几种写法:<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i egg-jwt --save</span><br></pre></td></tr></table></figure></p>
 <p>或者<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add egg-jwt --save</span><br></pre></td></tr></table></figure></p>
