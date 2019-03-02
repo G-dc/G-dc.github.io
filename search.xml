@@ -6,6 +6,7 @@
     <content type="text"><![CDATA[CSS 深度修改样式前端开发中使用UI库开发，大大的节省了开发的时间以及人力等等成本。但是有点不好的是，有时候一些UI库的默认样式达不到我们需要的效果，这个时候就需要我们自己手动改写一些相关的样式了。然后，问题来了，怎么去改固定的样式？也许有人会选择自己定义一些样式文件，替换掉原始的样式 —— 这是个不错的方法，也是个相当常用的方法。然而如果需要修改的位置不是很多的话，博主个人感觉这个方法不是很方便。所以这里博主列出几个比较常用的深度修改CSS的方法，仅供参考，如果有其他的也欢迎继续补充~~~ /deep/ 如果是使用预编译语言（Eg: Sass、Scss、Stylus) 编写样式的话，可以考虑使用 /deep/ 进行深层次修改操作。举个栗子： 1.classOne /deep/ .classTwo 如上面的栗子，其中的 .classOne 为自己定义的一个类名，在需要进行深层次修改的类名 （.classTwo） 外层定义，确保编译之后的 .classTwo 位于 .classOne 的内部，即可实现对 .classTwo 原样式的重定义操作。 &gt;&gt;&gt;如果是使用原生的 CSS 语言进行样式编写的话，则可以使用 &gt;&gt;&gt; 进行深层次的修改操作。举个栗子： 1.classOne &gt;&gt;&gt; .classTwo 如上面的栗子，其中的 .classOne 为自己定义的一个类名，在需要进行深层次修改的类名 （.classTwo） 外层定义，确保编译之后的 .classTwo 位于 .classOne 的内部，即可实现对 .classTwo 原样式的重定义操作。]]></content>
       <categories>
         <category>前端</category>
+        <category>CSS</category>
       </categories>
       <tags>
         <tag>CSS</tag>
@@ -17,6 +18,8 @@
     <content type="text"><![CDATA[关于egg-cors前后端分离的项目开发，跨域往往是一个避不开的坎。所以这里使用了egg-cors来完成跨域的相关配置。在这里做一下简单的记录。 egg-cors 的引入以及相关配置插件的引入有几种写法：1npm i egg-cors --save 或者1yarn add egg-cors --save 两种方法引入。 在 app/config/plugin.js 配置如下：1234exports.cors = &#123; enable: true, package: 'egg-cors'&#125;; 继续配置 app/config/config.default.js：12345config.cors = &#123; origins: ctx =&gt; ctx.get('origin'), allowMethods: 'GET, HEAD, PUT, POST, DELETE, PATCH', credentials: true&#125; 这里对以上几个参数的配置做一下简单的介绍。 当 credentials 参数不设置的时候 ( 或者设置为 false )，即默认前端发起请求的时候不允许在请求头与响应头里面携带 cookie 参数。此时可以设置 origin 参数为 &#39;*&#39;。然后也可以配合 egg-security 插件配置白名单 ( 这里博主还没有做过多研究，就简单带过 )。 当 credentials 参数设置为 true 的时候，前端配合设置 withCredentials 参数为 true ( 这里博主前端采用的技术栈是 axios )，即可以实现前端发起请求的时候允许携带 cookie 参数信息。但是这里有需要注意的地方，划重点划重点！！！ 当设置 credentials 为 true 时，origin 参数 不允许为 &#39;*&#39;! 不允许为 &#39;*&#39;! 不允许为 &#39;*&#39;! 而是只能设置为一个固定的 origin ( 连数组都不允许设置，感觉相当不友好啊，也不知道是不是博主自己配置错误了Orz…)。导致博主在本地开发的时候需要设置一个本地的 origin,部署到服务器的时候又要改成一个服务器的 origin，相当麻烦。 好在后来 Google 到了一个比较好的解决方案。就是按照之前所配置的写法，即：origin: ctx =&gt; ctx.get(&#39;origin&#39;)，直接在 ctx 里面取出相关的参数进行设置。这样就不用频繁去切换本地与服务端的参数值了~~~]]></content>
       <categories>
         <category>后端</category>
+        <category>egg</category>
+        <category>egg-cors</category>
       </categories>
       <tags>
         <tag>egg</tag>
@@ -29,6 +32,8 @@
     <content type="text"><![CDATA[关于egg-jwt由于涉及到登录注册的操作，所以考虑到需要生成 Token 来做验证登录信息（其实一开始并没有考虑到这方面，而是直接把用户信息直接 set 到浏览器的 cookie 里面，连加密都不带的，果然还是太年轻。后来经高人指点，才改成使用生成 Token 的方式来实现验证登录，都不必把用户信息丢到 cookie 里面了，想想也是不错的。） 这里使用 egg-jwt 来生成 Token 以及相关的校验操作。期间也踩了不少堪称弱智的坑…… 想了想还是做一下简单的记录，防止以后又陷进去。 egg-jwt 的引入以及相关配置引入插件，插件的引入有几种写法:1npm i egg-jwt --save 或者1yarn add egg-jwt --save 两种方法引入。 在 app/config/plugin.js 配置如下：1234exports.jwt = &#123; enable: true, package: 'egg-jwt'&#125;; 继续配置 app/config/config.default.js：123config.jwt = &#123; secret: '123456' // 这里的字符串参数可任意定义，作为加签与解签的盐值&#125; 到这里基本上就完成相关配置了，接下来就可以正式使用（踩坑）了。注：这里的踩坑顺序是按照博主自己开发的时候的开发顺序进行排序。 用户执行登录操作的时候，后端会对前端传回来的数据进行数据库匹配，如果匹配到符合的数据，则返回成功的信息并且返回相对应的用户信息（用来生成 Token 的载体 &quot;payload&quot; ）。好的，一号坑出现。 1、sign方法的参数问题 egg-jwt 生成 Token 的方法为 jwt.sign()，带有四个参数，分别是 &quot;payload&quot;、&quot;secret&quot;、&quot;options&quot;、&quot;callback&quot;。博主自己只用了前三个参数，所以偷个懒，只解释前三个就好了。 secret —— 关于这个参数前文有解释，是加签与解签时所需要的盐值。 options —— 生成 Token 所配置的一些其他参数。博主这里只设置了一个有效期的参数，即 expiresIn，值的话可任意定义，例如为 60s 则代表60秒, 10h 代表10小时， 1d 则代表1天（一般 Token 有效期不会太长，所以知道有这几个单位基本就够用了）。 payload —— 生成 Token 的载体，参数格式为 object。博主第一个坑就贡献在这里了。 问题场景登录成功之后，返回相对应的登录的用户相关信息，用来生成Token。 问题描述 直接将数据库查询返回的数据 RowDataPacket 作为payload 的话，报错信息为：1Expected "payload" to be a plain object. 控制台打印了一下 RowDataPacket 的数据格式为 object ( 貌似没有什么卵用。。。 使用 toJSON() 继续摸索，然后就继续 ERROR：1TypeError: xxx.toJSON is not a function 好吧此路不通。。。那就换条路。 使用 JSON.stringify() 进行序列化操作，解锁错误新成就：1Error: invalid expiresIn option for string payload 好的打扰了。。。 问题解决Google 了一下，Get 到了一个比较相似的 Issue 。琢磨了半天，尝试了一下 对序列化后的数据再进行反序列化操作 —— JSON.parse() 直接使用 Object.assign() 进行转化，然后，就没有然后了。居然成功了。。。莫非一开始拿到的值并不是一个真正意义上的 object ?这里博主暂时没有琢磨透，等琢磨透了再来更新。 其实对一些人来说，一号坑可能遇都不会遇到，可能是博主比较菜，所以还是踩了一小段时间的，记录一下只是防止以后再犯类似的错误。 到这里博主基本已经完成了登录成功之后签发 Token 的步骤了，并且将之存储在了浏览器的 cookie 里面，具体操作可参考 Egg cookie-and-session。之后的每次请求，前端部分都将Token的值放在了请求头的 authorization 里面，传到后端的时候再从请求头里面将该参数取出并解签。 2、verify方法的参数问题 这里博主定义了一个中间件（Middleware，具体操作可参考 中间件 (Middleware)）用来判断请求头是否存在该参数(具体哪些接口需要判断 Token 就要视业务情况来定了)。 不存在，则直接返回 401 状态码以及相关的错误信息，并且不继续请求接口操作。 若存在，则取出，使用 jwt.verify() 方法对参数进行解签，和 jwt.sign() 一样，也带有四个参数，参数名一致。这里博主只用到了前两个参数，所以只简单解释一下前两个参数。 payload —— 需要解签的 Token secret —— 一开始定义的盐值 好的，博主在这里遇到了二号坑。 问题场景前端请求后台数据时，首先进行 Token 的有效期校验操作。若解签时 Token 仍处于有效期，则需要重新加签分发，并且重新设置有效期。 问题描述直接对解签之后的数据进行加签操作 (即作为 jwt.sign() 的 payload)，解锁错误新成就：1Error: Bad "options.expiresIin" option the payload already has an "exp" property 将之前解签出来的数据打印出来，发现比原数据多了两个参数：iat 和 exp。其中 iat 代表的应该时加签分发时的时间戳，exp 代表的则是加签分发时设置的过期时间戳。因为分发时需要重新设置有效期，导致出现了重复的属性，才出现了上面的错误。 问题解决对解签得到的数据进行 delect 操作，移除属性 exp 就可以了，因为 iat 属性会重新生成一个值。delete 语法为： delete Object.property 或者 delete Object[&#39;property&#39;]。 目前位置在这个方面博主就踩过上述两个坑了。封装了一个简单的解签操作，在需要获取相关信息的 Controller 里面调用该方法解签之后获取相关信息就可以愉快的使用了~~~]]></content>
       <categories>
         <category>后端</category>
+        <category>egg</category>
+        <category>egg-jwt</category>
       </categories>
       <tags>
         <tag>egg</tag>
@@ -41,6 +46,7 @@
     <content type="text"><![CDATA[关于markdown_1其实我自己是比较抗拒写博客的（毕竟文笔不行，语言组织能力差，自己写的都不知道是什么乱七八糟的东西），然而不幸的是，一些东西不做记录的话万一哪天忘记了就真心尴尬了，就比如标题所说的 markdown 。所以我选择屈服。。。 关于markdown，其实并没有太陌生。毕竟现在做开发的经常性要写一些 readme 之类的说明性文件，而这类文件一般都是 .md 文件。So~~~ 还是老老实实学学 markdown 语法吧。顺便做个记录，防止以后又忘记了（不用防止，肯定就忘记了… 正题先说标题，markdown 语法支持定义六级标题。1、直接在一行文字的最前面添加1个到6个井号 # 和一个空格符即可成为标题，分别对应一级到六级标题，其中一级标题还会自带下划线。2、对于一级标题和二级标题还可以在该行文字下面分别使用一个到多个等号 = 或者减号 - 来表示。例如： 12345这是一级标题===========这是二级标题----- 我自己的话还是选择第一种写法就可以了（毕竟懒得记。]]></content>
       <categories>
         <category>语法</category>
+        <category>markdown</category>
       </categories>
       <tags>
         <tag>markdown</tag>
