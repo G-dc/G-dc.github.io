@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[css深度修改样式]]></title>
+    <url>%2F2019%2F03%2F02%2Fcss%E6%B7%B1%E5%BA%A6%E4%BF%AE%E6%94%B9%E6%A0%B7%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[CSS 深度修改样式前端开发中使用UI库开发，大大的节省了开发的时间以及人力等等成本。但是有点不好的是，有时候一些UI库的默认样式达不到我们需要的效果，这个时候就需要我们自己手动改写一些相关的样式了。然后，问题来了，怎么去改固定的样式？也许有人会选择自己定义一些样式文件，替换掉原始的样式 —— 这是个不错的方法，也是个相当常用的方法。然而如果需要修改的位置不是很多的话，博主个人感觉这个方法不是很方便。所以这里博主列出几个比较常用的深度修改CSS的方法，仅供参考，如果有其他的也欢迎继续补充~~~ /deep/ 如果是使用预编译语言（Eg: Sass、Scss、Stylus) 编写样式的话，可以考虑使用 /deep/ 进行深层次修改操作。举个栗子： 1.classOne /deep/ .classTwo 如上面的栗子，其中的 .classOne 为自己定义的一个类名，在需要进行深层次修改的类名 （.classTwo） 外层定义，确保编译之后的 .classTwo 位于 .classOne 的内部，即可实现对 .classTwo 原样式的重定义操作。 &gt;&gt;&gt;如果是使用原生的 CSS 语言进行样式编写的话，则可以使用 &gt;&gt;&gt; 进行深层次的修改操作。举个栗子： 1.classOne &gt;&gt;&gt; .classTwo 如上面的栗子，其中的 .classOne 为自己定义的一个类名，在需要进行深层次修改的类名 （.classTwo） 外层定义，确保编译之后的 .classTwo 位于 .classOne 的内部，即可实现对 .classTwo 原样式的重定义操作。]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[egg-cors]]></title>
     <url>%2F2019%2F02%2F28%2Fegg-cors%2F</url>
     <content type="text"><![CDATA[关于egg-cors前后端分离的项目开发，跨域往往是一个避不开的坎。所以这里使用了egg-cors来完成跨域的相关配置。在这里做一下简单的记录。 egg-cors 的引入以及相关配置插件的引入有几种写法：1npm i egg-cors --save 或者1yarn add egg-cors --save 两种方法引入。 在 app/config/plugin.js 配置如下：1234exports.cors = &#123; enable: true, package: 'egg-cors'&#125;; 继续配置 app/config/config.default.js：12345config.cors = &#123; origins: ctx =&gt; ctx.get('origin'), allowMethods: 'GET, HEAD, PUT, POST, DELETE, PATCH', credentials: true&#125; 这里对以上几个参数的配置做一下简单的介绍。 当 credentials 参数不设置的时候 ( 或者设置为 false )，即默认前端发起请求的时候不允许在请求头与响应头里面携带 cookie 参数。此时可以设置 origin 参数为 &#39;*&#39;。然后也可以配合 egg-security 插件配置白名单 ( 这里博主还没有做过多研究，就简单带过 )。 当 credentials 参数设置为 true 的时候，前端配合设置 withCredentials 参数为 true ( 这里博主前端采用的技术栈是 axios )，即可以实现前端发起请求的时候允许携带 cookie 参数信息。但是这里有需要注意的地方，划重点划重点！！！ 当设置 credentials 为 true 时，origin 参数 不允许为 &#39;*&#39;! 不允许为 &#39;*&#39;! 不允许为 &#39;*&#39;! 而是只能设置为一个固定的 origin ( 连数组都不允许设置，感觉相当不友好啊，也不知道是不是博主自己配置错误了Orz…)。导致博主在本地开发的时候需要设置一个本地的 origin,部署到服务器的时候又要改成一个服务器的 origin，相当麻烦。 好在后来 Google 到了一个比较好的解决方案。就是按照之前所配置的写法，即：origin: ctx =&gt; ctx.get(&#39;origin&#39;)，直接在 ctx 里面取出相关的参数进行设置。这样就不用频繁去切换本地与服务端的参数值了~~~]]></content>
