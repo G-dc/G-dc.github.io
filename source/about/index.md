@@ -5,4 +5,3 @@ type: "about"
 comments: false
 ---
 
-## 一条没有梦想的咸鱼
