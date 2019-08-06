@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[关于Vue的Filter小坑(1)]]></title>
+    <url>%2F2019%2F08%2F06%2F%E5%85%B3%E4%BA%8EVue%E7%9A%84Filter%E5%B0%8F%E5%9D%91-1%2F</url>
+    <content type="text"><![CDATA[关于Vue的Filter小坑最近因为业务需求，在工作之中使用了Vue的过滤器 —— Filters。然后，踩坑开始了。这里稍作记录，防止以后又掉进去=。= 1、filter过滤器不能识别 this emmm…一开始发现这个问题的时候有点懵逼，为何不可以在过滤器里面获取this？？？日常Google一下，发现这个问题的确存在于 vue2.x 的版本。行吧，只能想其他办法来完成这个需求了。 查阅了一番资料，发现还是有不少方法来解决这个问题的（毕竟大佬还是多的）。这里只总结其中的两种。 1、全局定义新变量全局定义一个变量（e.g.: that）,在 beforeCreate 函数将 this 指向新定义的变量，然后就可以直接在过滤器里面直接访问新变量了。 2、多参数在 filter 定义的函数里面传入多个参数，将需要的data作为参数传入。e.g.:1filterData | filterFun(data1, data2, ...) 好的，下一位~ 2、filter过滤器使用遍历的问题 又是一个坑。在过滤器里面使用遍历的时候，使用return没有效果，这又是什么鬼…百思不得其解，试了几种方法，还真试出了一种解决方法。 解决方法如果需要在过滤器里面遍历数据的话，可使用Array.filters()获取到符合的数据，再return即可。]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+        <category>Filter</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[css深度修改样式]]></title>
     <url>%2F2019%2F03%2F02%2Fcss%E6%B7%B1%E5%BA%A6%E4%BF%AE%E6%94%B9%E6%A0%B7%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[CSS 深度修改样式前端开发中使用UI库开发，大大的节省了开发的时间以及人力等等成本。但是有点不好的是，有时候一些UI库的默认样式达不到我们需要的效果，这个时候就需要我们自己手动改写一些相关的样式了。然后，问题来了，怎么去改固定的样式？也许有人会选择自己定义一些样式文件，替换掉原始的样式 —— 这是个不错的方法，也是个相当常用的方法。然而如果需要修改的位置不是很多的话，博主个人感觉这个方法不是很方便。所以这里博主列出几个比较常用的深度修改CSS的方法，仅供参考，如果有其他的也欢迎继续补充~~~ /deep/ 如果是使用预编译语言（Eg: Sass、Scss、Stylus) 编写样式的话，可以考虑使用 /deep/ 进行深层次修改操作。举个栗子： 1.classOne /deep/ .classTwo 如上面的栗子，其中的 .classOne 为自己定义的一个类名，在需要进行深层次修改的类名 （.classTwo） 外层定义，确保编译之后的 .classTwo 位于 .classOne 的内部，即可实现对 .classTwo 原样式的重定义操作。 &gt;&gt;&gt;如果是使用原生的 CSS 语言进行样式编写的话，则可以使用 &gt;&gt;&gt; 进行深层次的修改操作。举个栗子： 1.classOne &gt;&gt;&gt; .classTwo 如上面的栗子，其中的 .classOne 为自己定义的一个类名，在需要进行深层次修改的类名 （.classTwo） 外层定义，确保编译之后的 .classTwo 位于 .classOne 的内部，即可实现对 .classTwo 原样式的重定义操作。]]></content>
