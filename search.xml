@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Puppeteer踩坑记_01]]></title>
+    <url>%2F2019%2F08%2F09%2FPuppeteer%E8%B8%A9%E5%9D%91%E8%AE%B0-01%2F</url>
+    <content type="text"><![CDATA[Pupppeteer踩坑记_01由于工作需要，这两天开始研究前端爬虫。经过大佬推荐，使用 puppeteer 来搞一搞。由于第一次搞，所以也做好了踩坑的打算，这里就记录一下遇到的一些坑。 1、Puppeteer Error: Protocol error (Runtime.evaluate): Target closed. 偶然间发现了这个错误提示，google了一圈，找到了问题所在，原来是需要在1await browser.close() 前面加上等待，如下所示： 12await page.waitFor(4000);await browser.close(); 好的，问题解决。]]></content>
+      <categories>
+        <category>前端</category>
+        <category>爬虫</category>
+        <category>Puppeteer</category>
+      </categories>
+      <tags>
+        <tag>爬虫</tag>
+        <tag>Puppeteer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[关于Vue的Filter小坑(1)]]></title>
     <url>%2F2019%2F08%2F06%2F%E5%85%B3%E4%BA%8EVue%E7%9A%84Filter%E5%B0%8F%E5%9D%91-1%2F</url>
     <content type="text"><![CDATA[关于Vue的Filter小坑最近因为业务需求，在工作之中使用了Vue的过滤器 —— Filters。然后，踩坑开始了。这里稍作记录，防止以后又掉进去=。= 1、filter过滤器不能识别 this emmm…一开始发现这个问题的时候有点懵逼，为何不可以在过滤器里面获取this？？？日常Google一下，发现这个问题的确存在于 vue2.x 的版本。行吧，只能想其他办法来完成这个需求了。 查阅了一番资料，发现还是有不少方法来解决这个问题的（毕竟大佬还是多的）。这里只总结其中的两种。 1、全局定义新变量全局定义一个变量（e.g.: that）,在 beforeCreate 函数将 this 指向新定义的变量，然后就可以直接在过滤器里面直接访问新变量了。 2、多参数在 filter 定义的函数里面传入多个参数，将需要的data作为参数传入。e.g.:1filterData | filterFun(data1, data2, ...) 好的，下一位~ 2、filter过滤器使用遍历的问题 又是一个坑。在过滤器里面使用遍历的时候，使用return没有效果，这又是什么鬼…百思不得其解，试了几种方法，还真试出了一种解决方法。 解决方法如果需要在过滤器里面遍历数据的话，可使用Array.filters()获取到符合的数据，再return即可。]]></content>
