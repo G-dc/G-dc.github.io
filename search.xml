@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Puppeteer踩坑记_01]]></title>
-    <url>%2F2019%2F08%2F09%2FPuppeteer%E8%B8%A9%E5%9D%91%E8%AE%B0-01%2F</url>
+    <title><![CDATA[浅谈Puppeteer踩坑记_01]]></title>
+    <url>%2F2019%2F08%2F09%2F%E6%B5%85%E8%B0%88Puppeteer%E8%B8%A9%E5%9D%91%E8%AE%B0_01%2F</url>
     <content type="text"><![CDATA[Pupppeteer踩坑记_01由于工作需要，这两天开始研究前端爬虫。经过大佬推荐，使用 puppeteer 来搞一搞。由于第一次搞，所以也做好了踩坑的打算，这里就记录一下遇到的一些坑。 1、Puppeteer Error: Protocol error (Runtime.evaluate): Target closed. 偶然间发现了这个错误提示，google了一圈，找到了问题所在，原来是需要在1await browser.close() 前面加上等待，如下所示： 12await page.waitFor(4000);await browser.close(); 好的，问题解决。]]></content>
       <categories>
         <category>前端</category>
