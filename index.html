@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)https://nzt-poker.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://nzt-poker.com/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://nzt-poker.com/favicon-16x16.png">
+    <link rel="stylesheet" href="./index_files/main.css">
+    <title>NZT</title>
+
+    <script async="" src="./index_files/tag_ww.js"></script><script src="./index_files/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var arrLang = {};
+        var currentLang = "enlang";
+
+        $.getJSON("./locales/en/translation.json", function (data) {
+          arrLang.enlang = data;
+        });
+
+        $.getJSON("./locales/pt/translation.json", function (data) {
+          arrLang.ptlang = data;
+        });
+
+        $.getJSON("./locales/ru/translation.json", function (data) {
+          arrLang.rulang = data;
+        });
+
+        $.getJSON("./locales/zh/translation.json", function (data) {
+          arrLang.zhlang = data;
+        });
+
+        $(document).ajaxStop(function () {
+          function updateText(lang) {
+            $(".lang").each(function (index, element) {
+              $(this).text(arrLang[lang][$(this).attr("key")]);
+            });
+
+            var langText = $(`#${lang} .lang-text`).text();
+            $(".current-lang-text").text(langText);
+          }
+
+          // Определение языка по умолчанию
+          var browserLang = navigator.language || navigator.userLanguage;
+          var shortLang = browserLang.slice(0, 2);
+
+          if (shortLang === "pt") {
+            currentLang = "ptlang";
+          } else if (shortLang === "ru") {
+            currentLang = "rulang";
+          } else if (shortLang === "zh") {
+            currentLang = "zhlang";
+          }
+
+          updateText(currentLang);
+
+          $(".translate").click(function () {
+            var lang = $(this).attr("id");
+            currentLang = lang;
+            updateText(lang);
+          });
+
+          $(".download_button").click(function () {
+            var fileUrl = "";
+
+            if (currentLang === "zhlang") {
+              fileUrl = "https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp";
+            } else {
+              fileUrl = "https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp";
+            }
+
+            window.location.href = fileUrl;
+          });
+        });
+      });
+    </script>
+	
+	<!-- Google tag (gtag.js) -->
+    <script async="" src="./index_files/gtag.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PNY6DMXXRP');
+    </script>
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();
+	   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+	   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.webvisor.org/metrika/tag_ww.js", "ym");
+
+	   ym(98472634, "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/98472634" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	
+  </head>
+
+  <body>
+    <div class="main-hero shadow-radial shadow-linear">
+      <header class="container header">
+        <div class="header_menu">
+          <img src="./index_files/Logo.svg" alt="logo">
+          <nav>
+            <a class="lang" key="menu_product" href="https://nzt-poker.com/#product">产品</a>
+            <a class="lang" key="menu_howItWorks" href="https://nzt-poker.com/#howItWorks">工作原理</a>
+            <a class="lang" key="menu_forWhom" href="https://nzt-poker.com/#info">适用人群</a>
+            <a class="lang" key="menu_launch" href="https://nzt-poker.com/#launch">游戏启动</a>
+            <a class="lang" key="menu_faq" href="https://nzt-poker.com/#FAQ">常见问题</a>
+            <a class="lang" key="menu_about" href="https://nzt-poker.com/#contacts">关于我们</a>
+          </nav>
+        </div>
+        <div class="header_download">
+        <button class="header_download_button download_button lang" key="menu_download" onclick="window.location.href='https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp'">下载</button>
+        </div>
+        <div class="header_controls">
+          <a class="lang header_controls_partner" key="menu_partner" href="https://nzt-poker.com/#partner">成为合作伙伴</a>
+          <div class="header_controls_language_position"></div>
+        </div>
+      </header>
+      <div class="switch-lang">
+        <div class="current-lang">
+          <p class="current-lang-text">中文</p>
+        </div>
+
+        <div class="lang-dropdown">
+          <div class="selecting-lang translate" id="ptlang">
+            <p class="lang-text">PT</p>
+          </div>
+          <div class="selecting-lang translate" id="enlang">
+            <p class="lang-text">EN</p>
+          </div>
+          <div class="selecting-lang translate" id="rulang">
+            <p class="lang-text">РУ</p>
+          </div>
+          <div class="selecting-lang translate" id="zhlang">
+            <p class="lang-text">中文</p>
+          </div>
+        </div>
+      </div>
+      <div id="product" class="main container">
+        <div class="main_info">
+          <h1 class="lang" key="main_title">赢在NZT</h1>
+          <p class="lang" key="main_description">NZT 移动应用程序是基于人工智能的完美扑克提示工具！它将根据数亿次之前的手牌数据精确计算最佳操作，你只需根据它的指导进行操作，便能赚得更多。</p>
+         <button class="main_title" key="menu_download" onclick="window.location.href='https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp'">立即下载</button>        </div>
+
+        <div class="main_img">
+          <img src="./index_files/nzt_girl.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="rooms block">
+      <div class="rooms_title container">
+        <h1 class="lang" key="rooms_title">游戏室</h1>
+        <div class="rooms_buttons">
+          <button id="prev">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z"></path>
+            </svg>
+          </button>
+          <button id="next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="rooms_list">
+        <div id="wrapper">
+          <div id="carousel">
+            <div id="content">
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/pokerKing.png" alt="">
+                <div class="item_text">
+                  <h4>Poker King</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/wepoker.png" alt="">
+                <div class="item_text">
+                  <h4>Wepoker</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/pokerTime.png" alt="">
+                <div class="item_text">
+                  <h4>Poker Time</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/rulerPokerfishs.png" alt="">
+                <div class="item_text">
+                  <h4>Ruler<br><span>Pokerfishs</span></h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/pokerbros.png" alt="">
+                <div class="item_text">
+                  <h4>PokerBros</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/x-poker.png" alt="">
+                <div class="item_text">
+                  <h4>X-poker</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/pppoker.png" alt="">
+                <div class="item_text">
+                  <h4>PPPoker</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/kkpoker.png" alt="">
+                <div class="item_text">
+                  <h4>KKpoker</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/supremaPoker.png" alt="">
+                <div class="item_text">
+                  <h4>Suprema Poker</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/uPoker.png" alt="">
+                <div class="item_text">
+                  <h4>UPoker</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/wepokerHall.png" alt="">
+                <div class="item_text">
+                  <h4>Wepoker hall</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/dpzx.png" alt="">
+                <div class="item_text">
+                  <h4>DPZX</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/pokerRRR2.png" alt="">
+                <div class="item_text">
+                  <h4>Pokerrrr2</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+              <a class="item" target="_blank" href="https://hkadc2.989898.me/ref/download?id=4wdxvbbrhvtp">
+                <img src="./index_files/heroPoker.png" alt="">
+                <div class="item_text">
+                  <h4>Hero poker</h4>
+                  <p class="lang" key="rooms_download">下载</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="info" class="info block container">
+      <h1 class="lang" key="info_title">适用人群</h1>
+      <div class="info_group">
+        <div class="info_group_card">
+          <div class="info_group_card_main">
+            <img src="./index_files/GroupChips.png" alt="">
+            <div class="info_group_text">
+              <h3 class="lang" key="info_group_title_card_1">业余玩家</h3>
+              <p class="lang" key="info_group_description_card_1.1">通过提供正确的选择，帮助你享受游戏。</p>
+              <br>
+              <p class="lang" key="info_group_description_card_1.2">避免压力和经济损失。</p>
+            </div>
+          </div>
+        </div>
+        <div class="info_group_card">
+          <div class="info_group_card_main">
+            <img src="./index_files/up-arrow-chart.png" alt="">
+            <div class="info_group_text">
+              <h3 class="lang" key="info_group_title_card_2">专业玩家</h3>
+              <p class="lang" key="info_group_description_card_2.1">通过检查你的决策来提高你的扑克水平。</p>
+              <br>
+              <p class="lang" key="info_group_description_card_2.2">赢得更多，赚得更多。</p>
+            </div>
+          </div>
+        </div>
+        <div class="info_group_card">
+          <div class="info_group_card_main">
+            <img src="./index_files/wallet.png" alt="">
+            <div class="info_group_text">
+              <h3 class="lang" key="info_group_title_card_3">农场主</h3>
+              <p class="lang" key="info_group_description_card_3">提供稳定收入的信心，回报率约为800％！</p>
+            </div>
+          </div>
+        </div>
+        <div class="info_group_card">
+          <div class="info_group_card_main">
+            <img src="./index_files/money.png" alt="">
+            <div class="info_group_text">
+              <h3 class="lang" key="info_group_title_card_4">NZT适合所有人</h3>
+              <p class="lang" key="info_group_description_card_4">NZT适合从初学者到常客的所有人。它有助于在游戏中避免压力，提升你的扑克技能，并让你赚取必要的收入。</p>
+            </div>
+          </div>
+        </div>
+        <div class="info_group_card">
+          <div class="info_group_card_main">
+            <img src="./index_files/crownAndTable.png" alt="">
+            <div class="info_group_text">
+              <h3 class="lang" key="info_group_title_card_5">人工智能</h3>
+              <p class="lang" key="info_group_description_card_5">人工智能不仅会计算哪个桌子最适合坐下，还会选择最佳位置进行成功的游戏，并彻底研究对手，为你赢得最大收益。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info_buttons">
+        <!-- <button class="info_buttons_about lang" key="info_buttons_about">
+          О продукте
+        </button> -->
+      </div>
+    </div>
+    <div class="video video_shadow_radial video_shadow_linear block" id="howItWorks">
+      <div class="video_main container">
+        <div class="video-content">
+          <iframe src="./index_files/Yn7bUGQfzBE.html" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+        </div>
+      </div>
+    </div>
+    <div id="partner" class="partner block container">
+      <h1 class="lang" key="partner_title">成为我们的代理商，与NZT一起赚钱</h1>
+      <p class="lang" key="partner_subtitle">我们愿意接受各种形式的合作</p>
+      <div class="partner_types">
+        <div class="partner_types_item">
+          <div class="partner_types_item_main lang" key="partner_type_1">添加客服微信</div>
+        </div>
+        <div class="partner_types_item">
+        <div class="partner_types_item_main lang" key="partner_type_2" onclick="navigator.clipboard.writeText('AAPK23')&&alert('已复制：AAPK23')">AAPK23</div>        </div>
+        <div class="partner_types_item">
+          <div class="partner_types_item_main lang" key="partner_type_3">成为代理</div>
+        </div>
+      </div>
+      <div class="partner_buttons">
+      </div>
+    </div>
+    <div id="launch" class="instruction container block">
+      <div class="instruction_title">
+        <div class="instruction_title_minutes">
+          <h1>10</h1>
+          <span class="lang" key="instruction_title_minutes">分钟</span>
+        </div>
+        <div class="instruction_title_text">
+          <h1 class="lang" key="instruction_title_text">从安装到应用启动！</h1>
+        </div>
+      </div>
+      <div class="instruction_main">
+        <div class="instruction_main_item">
+          <img src="./index_files/smartphone.png" alt="">
+          <div class="instruction_main_item_text">
+            <h1>1</h1>
+            <p class="lang" key="instruction_main_card_1">设置模拟器或手机</p>
+          </div>
+        </div>
+        <div class="instruction_main_item">
+          <img src="./index_files/download.png" alt="">
+          <div class="instruction_main_item_text">
+            <h1>2</h1>
+            <p class="lang" key="instruction_main_card_2">下载并安装NZT注册</p>
+          </div>
+        </div>
+        <div class="instruction_main_item">
+          <img src="./index_files/poker-cards.png" alt="">
+          <div class="instruction_main_item_text">
+            <h1>3</h1>
+            <p class="lang" key="instruction_main_card_3">下载并安装扑克平台</p>
+          </div>
+        </div>
+        <div class="instruction_main_item">
+          <img src="./index_files/login.png" alt="">
+          <div class="instruction_main_item_text">
+            <h1>4</h1>
+            <p class="lang" key="instruction_main_card_4">使用已创建的俱乐部账户进入扑克平台</p>
+          </div>
+        </div>
+        <div class="instruction_main_item">
+          <img src="./index_files/manager.png" alt="">
+          <div class="instruction_main_item_text">
+            <h1>5</h1>
+            <p class="lang" key="instruction_main_card_5">如果通过我们的网站下载且未在其他地方购买，请联系NZT代理或我们，购买NZT燃料</p>
+          </div>
+        </div>
+        <div class="instruction_main_item">
+          <img src="./index_files/power-button.png" alt="">
+          <div class="instruction_main_item_text">
+            <h1>6</h1>
+            <p class="lang" key="instruction_main_card_6">激活燃料并开始游戏</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="advantages container block">
+      <div class="advantages_content">
+        <div class="advantages_content_title">
+          <h1 class="lang" key="advantages_title">为什么选择我们</h1>
+          <img src="./index_files/logo3d.png" alt="">
+        </div>
+        <div class="advantages_content_list">
+          <div class="advantages_content_list_item">
+            <img src="./index_files/playingCard.png" alt="">
+            <p class="lang" key="advantages_card_1">你可以免费获得软件——只需为提示付费。</p>
+          </div>
+          <div class="advantages_content_list_item">
+            <img src="./index_files/like.png" alt="">
+            <p class="lang" key="advantages_card_2">超过10,000名客户信任NZT！</p>
+          </div>
+          <div class="advantages_content_list_item">
+            <h1>14</h1>
+            <p class="lang" key="advantages_card_3">我们已经在市场上存在了14年以上！</p>
+          </div>
+          <div class="advantages_content_list_item">
+            <img src="./index_files/money-icon.png" alt="">
+            <p class="lang" key="advantages_card_4">在此期间，我们的客户赚取了数百万美元！</p>
+          </div>
+          <div class="advantages_content_list_item">
+            <img src="./index_files/code-box-fill.png" alt="">
+            <p class="lang" key="advantages_card_5">超过100名开发人员正在开发该产品。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="steps block">
+      <div class="steps_title container">
+        <h1 class="lang" key="steps_title">我们专注于长期合作，因此我们在所有阶段提供帮助。</h1>
+      </div>
+      <hr>
+      <div class="steps_main container">
+        <div class="steps_main_item">
+          <div class="steps_main_item_text">
+            <h1>1</h1>
+            <div class="steps_main_item_text_main">
+              <img src="./index_files/Vector.svg" alt="">
+              <p class="lang" key="steps_card_1">下载NZT</p>
+            </div>
+          </div>
+          <img class="steps_main_item_img" src="./index_files/download-step.png" alt="">
+        </div>
+        <div class="steps_main_item">
+          <div class="steps_main_item_text">
+            <h1>2</h1>
+            <div class="steps_main_item_text_main">
+              <img src="./index_files/Vector.svg" alt="">
+              <p class="lang" key="steps_card_2">学习说明</p>
+            </div>
+          </div>
+          <img class="steps_main_item_img" src="./index_files/learn-step.png" alt="">
+        </div>
+        <div class="steps_main_item">
+          <div class="steps_main_item_text">
+            <h1>3</h1>
+            <div class="steps_main_item_text_main">
+              <img src="./index_files/Vector.svg" alt="">
+              <p class="lang" key="steps_card_3">与支持人员沟通</p>
+            </div>
+          </div>
+          <img class="steps_main_item_img" src="./index_files/suport-step.png" alt="">
+        </div>
+        <div class="steps_main_item">
+          <div class="steps_main_item_text">
+            <h1>4</h1>
+            <div class="steps_main_item_text_main">
+              <img src="./index_files/Vector.svg" alt="">
+              <p class="lang" key="steps_card_4">解决技术问题</p>
+            </div>
+          </div>
+          <img class="steps_main_item_img" src="./index_files/solve-step.png" alt="">
+        </div>
+        <div class="steps_main_item">
+          <div class="steps_main_item_text">
+            <h1>5</h1>
+            <div class="steps_main_item_text_main">
+              <img src="./index_files/Vector.svg" alt="">
+              <p class="lang" key="steps_card_5">购买燃料</p>
+            </div>
+          </div>
+          <img class="steps_main_item_img" src="./index_files/get-step.png" alt="">
+        </div>
+        <div class="steps_main_item">
+          <div class="steps_main_item_text">
+            <h1>6</h1>
+            <div class="steps_main_item_text_main">
+              <img src="./index_files/Vector.svg" alt="">
+              <p class="lang" key="steps_card_6">赢取金钱！</p>
+            </div>
+          </div>
+          <img class="steps_main_item_img" src="./index_files/win-step.png" alt="">
+        </div>
+      </div>
+      <div class="steps_buttons container">
+        <button class="steps_buttons_button download_button lang" key="steps_button">立即下载</button>
+      </div>
+    </div>
+    <div class="benefits container block">
+      <h1 class="lang" key="benefits_title">扑克是一种智力游戏</h1>
+      <p class="lang" key="benefits_subtitle">在涉及金钱的事情上不要依赖运气，因为你可以计算到最细微的细节。</p>
+      <div class="benefits_main">
+        <div class="benefits_main_img">
+          <img src="./index_files/chart.png" alt="">
+          <p class="lang" key="benefits_img_description">偏离提示图</p>
+        </div>
+        <div class="benefits_main_block">
+          <div class="benefits_main_block_item lang" key="benefits_card_1">23BB/100！</div>
+          <div class="benefits_main_block_item lang" key="benefits_card_2">玩更多的桌子——赚取更多的收益！同时在7个桌子上参与！</div>
+          <div class="benefits_main_block_item lang" key="benefits_card_3">100％的安全性和保密性</div>
+        </div>
+      </div>
+      <div class="benefits_buttons">
+      </div>
+    </div>
+    <div class="news container block">
+      <h1 class="lang" key="news_title">新闻/促销</h1>
+      <div class="news_main">
+        <div class="news_main_item">
+          <img src="./index_files/news-img.png" alt="">
+          <div class="news_main_item_text">
+            <h3>Новость</h3>
+            <p>Текст новости</p>
+          </div>
+        </div>
+        <div class="news_main_item">
+          <img src="./index_files/news-img.png" alt="">
+          <div class="news_main_item_text">
+            <h3>Новость</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur. Egestas egestas massa
+              aliquam pellentesque cursus morbi.
+            </p>
+          </div>
+        </div>
+        <div class="news_main_item">
+          <img src="./index_files/news-img.png" alt="">
+          <div class="news_main_item_text">
+            <h3>Новость</h3>
+            <p>Текст новости</p>
+          </div>
+        </div>
+        <div class="news_main_item">
+          <img src="./index_files/news-img.png" alt="">
+          <div class="news_main_item_text">
+            <h3>Новость</h3>
+            <p>Текст новости</p>
+          </div>
+        </div>
+        <div class="news_main_item">
+          <img src="./index_files/news-img.png" alt="">
+          <div class="news_main_item_text">
+            <h3>Новость</h3>
+            <p>Текст новости</p>
+          </div>
+        </div>
+        <div class="news_main_item">
+          <img src="./index_files/news-img.png" alt="">
+          <div class="news_main_item_text">
+            <h3>Новость</h3>
+            <p>Текст новости</p>
+          </div>
+        </div>
+        <div class="news_main_item">
+          <img src="./index_files/news-img.png" alt="">
+          <div class="news_main_item_text">
+            <h3>Новость Новость Новость</h3>
+            <p>Текст новости</p>
+          </div>
+        </div>
+        <div class="news_main_item">
+          <img src="./index_files/news-img.png" alt="">
+          <div class="news_main_item_text">
+            <h3>Новость</h3>
+            <p>Текст новости</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="FAQ container block" id="FAQ">
+      <h1>FAQ</h1>
+
+      <div class="FAQ_accordion">
+        <div class="FAQ_accordion_items">
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_1">有哪些支付方式？</summary>
+            <p class="lang" key="FAQ_item_desc_1">您可以使用加密货币 (BTC 或 ETH)、Google Pay、Visa / MasterCard 支付。如果您希望使用其他支付方式，请通过 Telegram 联系我们，我们会为您安排。</p>
+          </details>
+
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_2">该应用程序有什么优势？</summary>
+            <p class="lang" key="FAQ_item_desc_3">目前可用的平台有：Winner (Pokerfishs)、HHpoker (Pokermaster)、Pokertime、Wepoker、Pokerking、Wepoker hall、WPT Global、Supremapoker、Pokerrrr2、X-poker、PPPoker、Upoker、Pokerbros、Heropoker、Club GG、KKPoker、DPZX。</p>
+          </details>
+
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_3">有哪些可用的扑克平台？</summary>
+            <p class="lang" key="FAQ_item_desc_3">目前可用的平台有：Winner (Pokerfishs)、HHpoker (Pokermaster)、Pokertime、Wepoker、Pokerking、Wepoker hall、WPT Global、Supremapoker、Pokerrrr2、X-poker、PPPoker、Upoker、Pokerbros、Heropoker、Club GG、KKPoker、DPZX。</p>
+          </details>
+
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_4">两个玩家能同时使用程序坐在同一张桌子上吗？</summary>
+            <p class="lang" key="FAQ_item_desc_4">是的，可以。</p>
+          </details>
+
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_5">如果桌上有两个玩家使用助手，谁会赢？</summary>
+            <p class="lang" key="FAQ_item_desc_5">NZT Poker 会识别其他 NZT Poker 帐户，并避免它们之间的激烈对抗。获胜的是最好的牌。</p>
+          </details>
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_6">程序是否记得客户之前玩过的对手？是否有基于该对手玩法的其他策略？</summary>
+            <p class="lang" key="FAQ_item_desc_6">不，NZT Poker 依赖于对手的统计数据，不会记住对手。</p>
+          </details>
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_7">使用 NZT Poker 我能否会输？</summary>
+            <p class="lang" key="FAQ_item_desc_7">NZT Poker 应用程序表现出色，根据限额，赢率超过 13bb/100 手牌。然而，短期内方差确实存在。</p>
+          </details>
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_8">你们是否保证购买优惠券后我不会亏损？</summary>
+            <p class="lang" key="FAQ_item_desc_8">玩家的成功将取决于距离以及他们如何准确地遵循 NZT Poker 的提示。一般来说，预期值超过 10bb/100 手牌。</p>
+          </details>
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_9">我需要玩多少手牌才能稳定获利？</summary>
+            <p class="lang" key="FAQ_item_desc_9">由于扑克是一种具有方差的游戏，只有在玩了足够多的手牌后才能分析特定策略的成功与否。否则，玩家可能只会经历短暂的幸运或不幸。因此，少于 20,000 手牌的距离被认为是不可靠的，无法评估特定策略。100,000 手牌的距离被认为足够可靠，可以得出结论并制定未来目标。</p>
+          </details>
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_10">我是新手/业余玩家，我能从 NZT Poker 中获益吗？</summary>
+            <p class="lang" key="FAQ_item_desc_10">绝对可以！NZT Poker 应用程序是初学者和业余玩家的绝佳选择，因为他们可以同时实现两个目标：提高扑克技巧和赢取金钱！</p>
+          </details>
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_11">我是职业扑克玩家，这对我有什么帮助？</summary>
+            <p class="lang" key="FAQ_item_desc_11">如果您以职业扑克为生，NZT Poker 将彻底改变游戏规则！该应用程序消除了与长时间分析、计算和决策相关的压力和压力。相反，您只需专注于获利，而应用程序会完成其余的工作。非常有利于您的心理健康！此外，作为额外的奖励：现在您甚至可以在赚钱的同时观看自己喜欢的电视节目。</p>
+          </details>
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_12">NZT Poker 是否分析其他玩家的游戏？</summary>
+            <p class="lang" key="FAQ_item_desc_12">是的，NZT Poker 会根据其他玩家在桌上的统计数据进行调整。</p>
+          </details>
+          <details class="FAQ_accordion_item">
+            <summary class="lang" key="FAQ_item_title_13">使用 NZT Poker 和不使用它的胜率分别是多少？</summary>
+            <p class="lang" key="FAQ_item_desc_13">赢率取决于扑克技巧和足够的样本量。大约 95% 的在线扑克玩家输钱。真正获胜的 5% 通常每 100 手牌赚取 1-3bb，这被认为是一个不错的结果。然而，使用 NZT Poker，您可以通过预期值超过 10bb/100 手牌来提高您的成绩！当然，这是一个相当出色但非常可实现的统计数据，显示了使用 NZT Poker 人工智能能力所能赚取的规模。</p>
+          </details>
+        </div>
+      </div>
+
+      <button class="lang FAQ_button more" key="FAQ_button_more">显示更多</button>
+      <button class="lang FAQ_button less" key="FAQ_button_less" style="display: none;">显示更少</button>
+    </div>
+    <footer id="contacts" class="contacts container">
+      <div class="contacts_nav">
+        <img src="./index_files/Logo.svg" alt="logo">
+        <div class="contacts_menu">
+          <nav>
+            <a class="lang" key="menu_product" href="https://nzt-poker.com/#product">产品</a>
+            <a class="lang" key="menu_howItWorks" href="https://nzt-poker.com/#howItWorks">工作原理</a>
+            <a class="lang" key="menu_forWhom" href="https://nzt-poker.com/#info">适用人群</a>
+            <a class="lang" key="menu_launch" href="https://nzt-poker.com/#launch">游戏启动</a>
+            <a class="lang" key="menu_faq" href="https://nzt-poker.com/#FAQ">常见问题</a>
+            <a class="lang" key="menu_about" href="https://nzt-poker.com/#contacts">关于我们</a>
+          </nav>
+        </div>
+      </div>
+      <img src="./index_files/telegram-qr2.png" alt="" class="contacts_qr"> 
+      <div class="contacts_socials">
+        <div class="contacts_socials_icons">
+          <div class="contacts_socials_icons_main">
+            <a href="https://t.me/NZT_bizdev" target="_blank"><img src="./index_files/telegram-icon.png" alt=""></a>
+            <a href="https://www.instagram.com/nzt_official_go/?igshid=OGQ5ZDc2ODk2ZA%3D%3D" target="_blank"><img src="./index_files/insta-icon.png" alt=""></a>
+            <!--<a href="https://wa.me/5511933375840" target="_blank"
+              ><img src="./img/contacts/whatsApp-icon.png" alt=""
+            /></a>-->
+          </div>
+          <a href="mailto:info@nzt-poker.com">微信AAPK23 电报DLCQJ8</a>
+        </div>
+      </div>
+    </footer>
+  
+
+  <script>
+    const gap = 16;
+
+    const carousel = document.getElementById("carousel"),
+      content = document.getElementById("content"),
+      next = document.getElementById("next"),
+      prev = document.getElementById("prev");
+
+    next.addEventListener("click", (e) => {
+      carousel.scrollBy(width + gap, 0);
+    });
+    prev.addEventListener("click", (e) => {
+      carousel.scrollBy(-(width + gap), 0);
+    });
+
+    let width = carousel.offsetWidth;
+    window.addEventListener("resize", (e) => (width = carousel.offsetWidth));
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const items = document.querySelectorAll(".FAQ_accordion_item");
+      const buttonMore = document.querySelector(".FAQ_button.more");
+      const buttonLess = document.querySelector(".FAQ_button.less");
+
+      // Изначально скрываем кнопку "Показать меньше"
+      buttonLess.style.display = "none";
+
+      buttonMore.addEventListener("click", function () {
+        const hiddenItems = Array.from(items).slice(3);
+
+        // Показываем все блоки
+        hiddenItems.forEach((item) => {
+          item.style.display = "block";
+        });
+
+        // Переключаем кнопки
+        buttonMore.style.display = "none";
+        buttonLess.style.display = "inline-block";
+      });
+
+      buttonLess.addEventListener("click", function () {
+        const hiddenItems = Array.from(items).slice(3);
+
+        // Скрываем все блоки, кроме первых трех
+        hiddenItems.forEach((item) => {
+          item.style.display = "none";
+        });
+
+        // Переключаем кнопки
+        buttonLess.style.display = "none";
+        buttonMore.style.display = "inline-block";
+      });
+    });
+  </script>
+
+  <script>
+    document.querySelectorAll(".go_to_telegram").forEach((button) => {
+      button.addEventListener("click", function () {
+        window.open("https://t.me/NZT_bizdev", "_blank");
+      });
+    });
+    document
+      .querySelectorAll(".go_to_partnership_agents_telegram")
+      .forEach((button) => {
+        button.addEventListener("click", function () {
+          window.open("https://t.me/NZT_bizdev", "_blank");
+        });
+      });
+      document
+      .querySelectorAll(".go_to_partnership_learn_telegram")
+      .forEach((button) => {
+        button.addEventListener("click", function () {
+          window.open("https://t.me/DP_bizdev", "_blank");
+        });
+      });
+  </script>
+
+</body></html>
