@@ -920,6 +920,12 @@ h1 {
   font-weight: 600;
 }
 
+.steps_main_item_img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .steps_buttons {
   display: flex;
   justify-content: center;
